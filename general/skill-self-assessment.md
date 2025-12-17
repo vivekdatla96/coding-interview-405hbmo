@@ -13,7 +13,7 @@ write reusable/efficient services to automate analysis and data processes in Sca
 write reusable/efficient services to automate analysis and data processes in Python​ |5  |7  | 
 publish and/or consume/subscribe to Google Pub/Sub signals​ |  3|  2| 
 Google BigQuery​ | 3 | 3 | 
-engineer low-latency/streaming/event-based and batch-based data pipelines in a resilient and scalable manner using Google DataFlow, Airflow, Beam, etc.​ |  |  | 
+engineer low-latency/streaming/event-based and batch-based data pipelines in a resilient and scalable manner using Google DataFlow, Airflow, Beam, etc.​ | 5 | 4 | 
 Google Dataproc / Apache Spark​ |4  | 5 | 
 Data modelling​ |4  |  6| 
 Databricks​ | 4 | 5 | 
