@@ -1,83 +1,154 @@
-# Code Challenge Template
-This project implements an end-to-end weather data pipeline that ingests historical weather observations, aggregates yearly statistics, and exposes the data through a RESTful API.
+Overview
 
-The solution is designed with scalability, testability, and cloud deployment in mind and follows industry best practices for data engineering and API development.
+This project implements a Python-based batch process to analyze Formula 1 driver lap times from a CSV file. The program reads lap time data, computes key performance metrics per driver, ranks drivers based on average lap time, and outputs the top three drivers.
 
-Raw Weather Files
-        │
-        ▼
-Ingestion (Python)
-        │
-        ▼
-MySQL (weather table)
-        │
-        ▼
-Aggregation (Yearly Stats)
-        │
-        ▼
-MySQL (weather_yearly_stats)
-        │
-        ▼
-REST API (Flask + Swagger)
+The solution emphasizes clear structure, deterministic logic, logging, and correctness, suitable for an engineering take-home assessment.
 
-Local Setup Guide
-1. Prerequisites
-Before starting, ensure the following are installed on your system:
-    Python 3.10+
-    MySQL 8.x
-    Git
-    (Optional but recommended) Docker
+Problem Statement
 
-2. Clone the Repository
-    git clone https://github.com/vivekdatla96/coding-interview_Assignment
-    cd code-challenge-template
+Given a CSV file containing Formula 1 driver lap times:
 
-3. Create and Activate Python Virtual Environment
-    python -m venv venv
-    venv\Scripts\activate
+Calculate the average lap time for each driver
 
-4. Install Python Dependencies
-    pip install --upgrade pip
-    pip install -r src/requirements.txt
+Identify the fastest lap time per driver
 
-5. Set Up MySQL Database
- Run the each scripts mentioned in db/init folder in numberical order
+Rank drivers by:
 
-6. Run Data Ingestion
-    Place raw weather files into the input directory (as specified in ingestion code).
-    Bash Script:
-    cd src
-    python ingestion/load_weather.py
+Average lap time (ascending)
 
-7. Run Aggregation (Yearly Statistics)
-    python src\aggregation\populate_weather_yearly_stats.py
+Fastest lap time (ascending)
 
-8. Start the REST API
-    python api/app.py
-    API will be available at: http://localhost:5000
+Driver name (alphabetical, for deterministic ordering)
 
-9. Test Using Swagger UI
-    http://localhost:5000/swagger
-    
-10. Run Unit Tests
-    pytest -v
+Output the top three drivers with their ranking, average lap time, and fastest lap time
+
+Project Structure
+coding-interview-405hbmo/
+├── data/
+│   ├── input/
+│   │   └── lap_times.csv
+│   └── output/
+│       └── top_3_drivers.csv
+├── src/
+│   └── lap_time_processor.py
+└── README.md
+
+Implementation Details
+Core Module
+
+All processing logic is implemented in:
+
+src/lap_time_processor.py
+
+Processing Steps
+
+The script performs the following steps:
+
+Reads lap time data from a CSV file
+
+Aggregates lap times by driver
+
+Calculates average and fastest lap times per driver
+
+Applies deterministic ranking logic
+
+Writes the top three drivers to an output CSV file
+
+Ranking Logic
+
+Drivers are ranked using the following criteria:
+
+Average lap time (ascending)
+
+Fastest lap time (ascending)
+
+Driver name (alphabetical order)
+
+This ensures consistent and reproducible results across executions.
+
+Input Format
+
+The input CSV file must contain the following columns:
+
+Column	Type	Description
+Driver	string	Driver name or identifier
+Time	number	Lap time in seconds
+Notes
+
+The CSV file must include a header row
+
+Lap times must be numeric
+
+The input file is assumed to be well-formed
+
+Input file location:
+
+data/input/lap_times.csv
+
+Output
+
+The program generates a CSV file containing the top three drivers ranked by average lap time.
+
+Output Columns
+Column	Description
+Position	Driver rank
+Driver	Driver name
+AverageLapTime	Average lap time
+FastestLapTime	Fastest lap time
+
+Output file location:
+
+data/output/top_3_drivers.csv
+
+Logging & Error Handling
+
+Uses Python’s built-in logging module
+
+Logs key execution steps including:
+
+File reading
+
+Statistics calculation
+
+Driver ranking
+
+Output generation
+
+Errors such as missing files or invalid data formats are logged and raised
+
+How to Run
+Prerequisites
+
+Python 3.9 or higher
+
+Execution
+
+From the project root directory, run:
+
+python src/lap_time_processor.py
 
 
-Data Pipeline
-Ingestion
-    Parses raw weather files
-    Validates records
-    Loads data into MySQL
-    Handles missing or invalid values gracefully
-    Idempotent (safe to re-run)
-Aggregation
- Computes yearly averages and totals
-    Upserts into weather_yearly_stats
-    
+Ensure the input file exists at:
 
-REST API
-1. GET /api/weather
-2. GET /api/weather/stats
+data/input/lap_times.csv
 
-Author
-Vivek Datla
+Assumptions
+
+Each driver has at least one lap time
+
+Input data fits in memory
+
+Lap times are measured in seconds
+
+Only the top three drivers are required for output
+
+Limitations & Future Improvements
+
+Add command-line arguments for configurable input/output paths
+
+Improve resilience by skipping malformed rows instead of failing
+
+Add automated unit tests for validation and regression coverage
+
+
+Vivek datla
