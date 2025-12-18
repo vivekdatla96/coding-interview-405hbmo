@@ -159,25 +159,6 @@ data/input/lap_times.csv
 * Lap times are measured in seconds
 * Only the top three drivers are required for output
 
----
-
-## Limitations & Future Improvements
-
-* Add command-line arguments for configurable input/output paths
-* Improve resilience by skipping malformed rows instead of failing
-* Add automated unit tests for validation and regression coverage
-
----
-
-## Markdown Formatting Example
-
-To ensure the expression `iy = t` renders correctly on GitHub, use inline code:
-
-```
-iy = t
-```
-
-Use inline code for guaranteed, plain-text rendering across all GitHub views.
 
 ---
 
